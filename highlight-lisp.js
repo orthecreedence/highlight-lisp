@@ -7,10 +7,8 @@
  * @licence MIT
  */
 var highlight_lisp = function() {
-	// all of the following definitions were pulled straight from my syntax/lisp.vim
+	// all of the following functions were pulled straight from my syntax/lisp.vim
 	// file in my vim directory.
-	//
-	// this includes functions, known globals, known keywords, lambda list specials
 	var funcs =
 		'\\* find-method pprint-indent find-package pprint-linear find-restart ' +
 		'pprint-logical-block \\+ find-symbol pprint-newline finish-output ' +
@@ -50,7 +48,7 @@ var highlight_lisp = function() {
 		'int-char restart-name bit-vector integer return bit-vector-p ' +
 		'integer-decode-float return-from bit-xor integer-length revappend block ' +
 		'integerp reverse boole interactive-stream-p room boole-1 intern rotatef ' +
-		'boole-2 internal-time-units-per-second round boole-and intersection ' +
+		'boole-2 round boole-and intersection ' +
 		'row-major-aref boole-andc1 invalid-method-error rplaca boole-andc2 ' +
 		'invoke-debugger rplacd boole-c1 invoke-restart safety boole-c2 ' +
 		'invoke-restart-interactively satisfies boole-clr isqrt sbit boole-eqv keyword ' +
@@ -175,13 +173,14 @@ var highlight_lisp = function() {
 		'pathname-name with-output-to-string file-error pathname-type ' +
 		'with-package-iterator file-error-pathname pathname-version with-simple-restart ' +
 		'file-length pathnamep with-slots file-namestring peek-char ' +
-		'with-standard-io-syntax file-position phase write file-stream pi write-byte ' +
+		'with-standard-io-syntax file-position phase write file-stream write-byte ' +
 		'file-string-length plusp write-char file-write-date pop write-line fill ' +
 		'position write-sequence fill-pointer position-if write-string find ' +
 		'position-if-not write-to-string find-all-symbols pprint y-or-n-p find-class ' +
 		'pprint-dispatch yes-or-no-p find-if pprint-exit-if-list-exhausted zerop ' +
 		'find-if-not pprint-fill';
 
+	// common lisp global variables. also from lisp.vim
 	var standard_vars =
 		'\\*applyhook\\* \\*load-pathname\\* \\*print-pprint-dispatch\\* \\*break-on-signals\\* ' +
 		'\\*load-print\\* \\*print-pprint-dispatch\\* \\*break-on-signals\\* \\*load-truename\\* ' +
@@ -195,8 +194,10 @@ var highlight_lisp = function() {
 		'\\*debugger-hook\\* \\*print-gensym\\* \\*read-suppress\\* \\*default-pathname-defaults\\* ' +
 		'\\*print-length\\* \\*readtable\\* \\*error-output\\* \\*print-level\\* \\*standard-input\\* ' +
 		'\\*evalhook\\* \\*print-lines\\* \\*standard-output\\* \\*features\\* \\*print-miser-width\\* ' +
-		'\\*terminal-io\\* \\*gensym-counter\\* \\*print-miser-width\\* \\*trace-output\\*';
+		'\\*terminal-io\\* \\*gensym-counter\\* \\*print-miser-width\\* \\*trace-output\\* ' +
+		'pi internal-time-units-per-second';
 
+	// common lisp known keywords
 	var keywords =
 		':abort :from-end :overwrite :adjustable :gensym :predicate :append :host ' +
 		':preserve-whitespace :array :if-does-not-exist :pretty :base :if-exists :print ' +
@@ -248,13 +249,19 @@ var highlight_lisp = function() {
 	 * Collections of search and replaces to make.
 	 */
 	var replace = [
+		// ---------------------------------------------------------------------
 		// strings (should !!ALWAYS!! be first, lest our <span> tags be destroyed...)
+		// ---------------------------------------------------------------------
 		{regex: /"([\s\S]*?)"/gm, replace: '<span class="string">"$1"</span>'},
 
+		// ---------------------------------------------------------------------
 		// comments
+		// ---------------------------------------------------------------------
 		{regex: /(;.*)(\n|$)/gm, replace: '<span class="comment">$1</span>$2'},
 
+		// ---------------------------------------------------------------------
 		// "special" (let/lambda)
+		// ---------------------------------------------------------------------
 		{
 			regex: new RegExp('.'+list_to_regex(special)+'(\\s)', 'gm'),
 			replace: function(fullmatch, fnname, whitespace) {
@@ -270,7 +277,10 @@ var highlight_lisp = function() {
 		},
 
 
+		// ---------------------------------------------------------------------
 		// function matches
+		// ---------------------------------------------------------------------
+		// known functions
 		{
 			regex: new RegExp('.'+list_to_regex(funcs)+'(\\s)', 'gm'),
 			replace: function(fullmatch, fnname, whitespace) {
@@ -284,6 +294,7 @@ var highlight_lisp = function() {
 				}
 			}
 		},
+		// symbol functions (#'my-fn)
 		{
 			regex: /(\s|[()])(#'(\w[\w_-]*))(\s|[()])/g,
 			replace: function(fullmatch, delim1, symfun, sym, delim2)
@@ -293,14 +304,19 @@ var highlight_lisp = function() {
 				{
 					known = true;
 				}
-				return delim1 +'<span class="function'+ (known ? ' known' : '') +'">'+ symfun +'</span>'+ delim2;
+				return delim1 +'<span class="function symbol'+ (known ? ' known' : '') +'">'+ symfun +'</span>'+ delim2;
 			}
 		},
 
+		// ---------------------------------------------------------------------
 		// lambda keywords
+		// ---------------------------------------------------------------------
 		{regex: new RegExp('(\\s)'+list_to_regex(lambda)+'(\\s)', 'gm'), replace: '$1<span class="lambda-list">$2</span>$3'},
 
+		// ---------------------------------------------------------------------
 		// symbols/keywords/variables
+		// ---------------------------------------------------------------------
+		// known keywords
 		{regex: /(\s|[()])('\w[\w_-]*)(\s|[()])/g, replace: '$1<span class="symbol">$2</span>$3'},
 		{
 			regex: new RegExp('(\\s)'+list_to_regex(keywords)+'(\\s)', 'g'),
@@ -308,6 +324,7 @@ var highlight_lisp = function() {
 				return whitespace + '<span class="keyword known">'+ keyword +'</span>'+ whitespace2;
 			}
 		},
+		// generic keywords
 		{
 			regex: /(\s|[()])(:\w[\w_-]*)/g,
 			replace: function(fullmatch, delim, keyword) {
@@ -318,21 +335,32 @@ var highlight_lisp = function() {
 				return fullmatch;
 			}
 		},
+		// known variables
 		{
 			regex: new RegExp('(\\s|[()])'+list_to_regex(standard_vars)+'(\\s|[()])', 'g'),
 			replace: function(fullmatch, whitespace, varname, whitespace2) {
 				return whitespace + '<span class="variable known">'+ varname +'</span>'+ whitespace2;
 			}
 		},
+		// globals/constants
 		{regex: /(\s|[()])(\*\w[\w_-]*\*)(\s|[()])/g, replace: '$1<span class="variable global">$2</span>$3'},
 		{regex: /(\s|[()])(\+\w[\w_-]*\+)(\s|[()])/g, replace: '$1<span class="variable constant">$2</span>$3'},
 
+		// ---------------------------------------------------------------------
 		// numbers
+		// ---------------------------------------------------------------------
+		// binary
     	{regex: /(\s|[()])(#b[01]+)(\s|[()])/gi, replace: '$1<span class="number binary">$2</span>$3'},
+		// hex
     	{regex: /(\s|[()])(#x[\da-f]+)(\s|[()])/gi, replace: '$1<span class="number hex">$2</span>$3'},
+		// float
     	{regex: /(\s|[()])([+-]{0,1}(?:\d+\.\d+|\d+\.|\.\d+))(\s|[()])/g, replace: '$1<span class="number float">$2</span>$3'},
+		// integers
     	{regex: /(\s|[()])([+-]{0,1}\d+)(\s|[()])/g, replace: '$1<span class="number integer">$2</span>$3'},
 
+		// ---------------------------------------------------------------------
+		// misc parsers
+		// ---------------------------------------------------------------------
 		// t/nil
 		{regex: /(\s|[()])nil(\s|[()])/g, replace: '$1<span class="nil">nil</span>$2'},
 		{regex: /(\s|[()])t(\s|[()])/g, replace: '$1<span class="nil">t</span>$2'},
@@ -341,13 +369,13 @@ var highlight_lisp = function() {
 		{regex: /\((\w[\w_-]*)(\s)/g, replace: '(<span class="function">$1</span>$2'},
 
 		// ()'s (should most probably be last, unless there's a good reason)
-		//{regex: /([()])/g, replace: '<span class="list">$1</span>'}
+		{regex: /([()])/g, replace: '<span class="list">$1</span>'}
 	];
 
 	/**
 	 * Main highlight function.
 	 */
-	this.highlight = function(code_el)
+	this.highlight_element = function(code_el)
 	{
 		var html = code_el.innerHTML;
 		// can't have &...;'s running wild like a pack of animals...
@@ -360,6 +388,27 @@ var highlight_lisp = function() {
 			html = html.replace(rep.regex, rep.replace);
 		}
 		code_el.innerHTML = html;
+	},
+
+	/**
+	 * Automatically highlight all <code class="lisp"> blocks
+	 *
+	 * Takes an options arg, which can be used to specify the classname of the
+	 * <code> tags you wish to highlight.
+	 */
+	this.highlight_auto = function(options)
+	{
+		options || (options = {});
+		var classname = options.className ? options.className : 'lisp';
+		var codes = document.getElementsByTagName('code');
+		for(var i = 0, n = codes.length; i < n; i++)
+		{
+			var code = codes[i];
+			if(code.className.match(classname))
+			{
+				this.highlight_element(code);
+			}
+		}
 	}
 };
 

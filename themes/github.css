@@ -1,20 +1,20 @@
 pre { white-space: pre; background-color: #f8f8f8; border: 1px solid #ccc; font-size: 13px; line-height: 19px; overflow: auto; padding: 6px 10px; border-radius: 3px; }
-pre code {white-space: pre; margin: 0; padding: 0; background: none; border: none; overflow-x: auto; font-size: 13px;}
-code {margin: 0 2px; padding: 0 5px; white-space: nowrap; font-family: Consolas, "Liberation Mono", Courier, monospace; background: #f8f8f8; border: 1px solid #eaeaea; border-radius: 3px;}
+pre code.lisp {white-space: pre; margin: 0; padding: 0; background: none; border: none; overflow-x: auto; font-size: 13px;}
+code.lisp {margin: 0 2px; padding: 0 5px; white-space: nowrap; font-family: Consolas, "Liberation Mono", Courier, monospace; background: #f8f8f8; border: 1px solid #eaeaea; border-radius: 3px;}
 
-pre {color: #008080;}
-pre .function {color: #008080;}
-pre .function.known {color: #800603;}
-pre .function.known.special {color: #2d2d2d; font-weight: bold;}
-pre .keyword {color: #990073;}
-pre .keyword.known {color: #990073;}
-pre .symbol {color: #75a;}
-pre .lambda-list {color: #966;}
-pre .number {color: #800;}
-pre .variable.known {color: #c3c;}
-pre .variable.global {color: #939;}
-pre .variable.constant {color: #229;}
-pre .nil {color: #f00;}
+pre code.lisp {color: #008080;}
+pre code.lisp .function {color: #008080;}
+pre code.lisp .function.known {color: #800603;}
+pre code.lisp .function.known.special {color: #2d2d2d; font-weight: bold;}
+pre code.lisp .keyword {color: #990073;}
+pre code.lisp .keyword.known {color: #990073;}
+pre code.lisp .symbol {color: #75a;}
+pre code.lisp .lambda-list {color: #966;}
+pre code.lisp .number {color: #800;}
+pre code.lisp .variable.known {color: #c3c;}
+pre code.lisp .variable.global {color: #939;}
+pre code.lisp .variable.constant {color: #229;}
+pre code.lisp .nil {color: #f00;}
 
-pre .comment, pre .comment *, pre .comment .string {color: #aaa !important;}
-pre .string, pre .string * {color: #d14 !important;}
+pre code.lisp .comment, pre .comment *, pre .comment .string {color: #aaa !important;}
+pre code.lisp .string, pre .string * {color: #d14 !important;}
