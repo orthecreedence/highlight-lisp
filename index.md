@@ -6,6 +6,13 @@ layout: default
 highlight-lisp demo
 ===================
 
+<script type="text/javascript">
+function do_highlight() {
+    HighlightLisp.highlight_auto();
+}
+</script>
+<input type="button" id="highlight_btn" value="Click me to highlight!" onclick="do_highlight()" />
+
 <pre><code class="lisp">;; known globals
 *read-base*
 (let* ((*package* nil)) 'random-symbol)   ; let/let*/lambda are "special"
