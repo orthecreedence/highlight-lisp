@@ -34,10 +34,10 @@ function do_highlight() {
 (defun test-me (lol &key omg (lol 'wtf))
   (let ((*global* 'ur-mom)
         (strings "r pretty kewl LOL")
-        (multi-line-strings "can be badass
+        (multi-line-strings "can be kewl
             as well")
         (+my-constant+ "wait, constants don't change!!"))
-    (make-instance 'error :message "YOU SUCK!!!")))
+    (make-instance 'error :message "OMG ERROR!!!")))
 
 ;; known vs unknown #'functions
 (make-hash-table :test #'equal)
