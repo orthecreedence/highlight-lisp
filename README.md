@@ -6,6 +6,8 @@ completely themable via CSS (themes included).
 The purpose of this is to make it really easy to embed beautiful Common Lisp 
 code into a website with minimal effort.
 
+[See the demo!](http://orthecreedence.github.com/highlight-lisp/)
+
 Usage
 -----
 Usage is simple. You include `highlight-lisp.js`, link to one of the CSS themes,
