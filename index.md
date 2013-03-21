@@ -17,9 +17,7 @@ Worry no more, your life is about to be transformed:
  value="Click to CHANGE YOUR LIFE FOREVER!"
  id="highlight_btn"
  onclick="HighlightLisp.highlight_auto(); document.getElementById('highlight_btn').disabled=true;"
-/>
-
-**!!!WARNING!!!** There is no going back!
+/> **!!!WARNING!!!** There is no going back!
 
 <pre><code class="lisp">;; known globals
 *read-base*
