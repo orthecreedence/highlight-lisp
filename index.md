@@ -23,8 +23,8 @@ Worry no more, your Common Lisp code highlighting woes are over!
 
 <ul class="themes clear">
     <li><strong>Themes</strong></li>
-    <li><a href="#github" onclick="switch_theme('github');">Github</a></li>
-    <li><a href="#dark" onclick="switch_theme('dark');">Dark</a></li>
+    <li><a href="#github" onclick="return switch_theme('github');">Github</a></li>
+    <li><a href="#dark" onclick="return switch_theme('dark');">Dark</a></li>
 </ul>
 
 <pre><code class="lisp">;; known globals
