@@ -16,7 +16,7 @@ Worry no more, your life is about to be transformed:
  type="button"
  value="Click to CHANGE YOUR LIFE FOREVER!"
  id="highlight_btn"
- onclick="HighlightLisp.highlight_auto(); document.getElementById('highlight_btn').style.display='none';"
+ onclick="HighlightLisp.highlight_auto(); document.getElementById('highlight_btn').disabled=true;"
 />
 
 **!!!WARNING!!!** There is no going back!
