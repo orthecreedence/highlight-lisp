@@ -11,12 +11,12 @@ code.lisp .function.known {color: #81a2be; color: #91b2ce;}
 code.lisp .function.known.special {color: #ba7; font-weight: bold;}
 code.lisp .keyword {color: #b299ab;}
 code.lisp .keyword.known {color: #b294bb;}
-code.lisp .symbol {color: #75a;}
+code.lisp .symbol {color: #c9c;}
 code.lisp .lambda-list {color: #9aa;}
 code.lisp .number {color: #c76;}
-code.lisp .variable.known {color: #c3c;}
-code.lisp .variable.global {color: #cc6666;}
-code.lisp .variable.constant {color: #229;}
+code.lisp .variable.known {color: #9dd;}
+code.lisp .variable.global {color: #aaa;}
+code.lisp .variable.constant {color: #a77;}
 code.lisp .nil {color: #de935f;}
 code.lisp .list {}
 
