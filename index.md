@@ -36,7 +36,6 @@ Worry no more, your life is about to be transformed:
 
 ;; testing lambda-list specials (&key, &body, etc), multi-line strings,
 ;; constants, symbols, keywords
-;;
 (defun test-me (lol &key omg (lol 'wtf))
   (let ((*global* 'ur-mom)
         (strings "r pretty kewl LOL")
