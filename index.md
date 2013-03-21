@@ -14,14 +14,14 @@ Worry no more, your troubles are over!
 
 Introducing `highligh-lisp.js`.
 
-{*
+<!--
 <input
  type="button"
  value="Click to CHANGE YOUR LIFE FOREVER!"
  id="highlight_btn"
  onclick="do_highlight();"
 /> **!!!WARNING!!!** There is no going back!
-*}
+-->
 
 <ul class="themes clear">
     <li><strong>Themes</strong></li>
