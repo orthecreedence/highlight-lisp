@@ -25,6 +25,7 @@ Worry no more, your Common Lisp code highlighting woes are over!
     <li><strong>Themes</strong></li>
     <li><a href="#github" onclick="return switch_theme('github');">Github</a></li>
     <li><a href="#dark" onclick="return switch_theme('dark');">Dark</a></li>
+    <li><a href="#wookie" onclick="return switch_theme('wookie');">Wookie</a></li>
 </ul>
 
 <pre><code class="lisp">;; known globals
