@@ -263,7 +263,7 @@ var highlight_lisp = function() {
 		// "special" (let/lambda)
 		// ---------------------------------------------------------------------
 		{
-			regex: new RegExp('.'+list_to_regex(special)+'(\\s)', 'gm'),
+			regex: new RegExp('.'+list_to_regex(special)+'(\\s|[()])', 'gm'),
 			replace: function(fullmatch, fnname, whitespace) {
 				if(fullmatch[0] == '(')
 				{
@@ -282,7 +282,7 @@ var highlight_lisp = function() {
 		// ---------------------------------------------------------------------
 		// known functions
 		{
-			regex: new RegExp('.'+list_to_regex(funcs)+'(\\s)', 'gm'),
+			regex: new RegExp('.'+list_to_regex(funcs)+'(\\s|[()])', 'gm'),
 			replace: function(fullmatch, fnname, whitespace) {
 				if(fullmatch[0] == '(')
 				{
@@ -311,15 +311,16 @@ var highlight_lisp = function() {
 		// ---------------------------------------------------------------------
 		// lambda keywords
 		// ---------------------------------------------------------------------
-		{regex: new RegExp('(\\s)'+list_to_regex(lambda)+'(\\s)', 'gm'), replace: '$1<span class="lambda-list">$2</span>$3'},
+		{regex: new RegExp('(\\s|[()])'+list_to_regex(lambda)+'(\\s|[()])', 'gm'), replace: '$1<span class="lambda-list">$2</span>$3'},
 
 		// ---------------------------------------------------------------------
 		// symbols/keywords/variables
 		// ---------------------------------------------------------------------
-		// known keywords
+		// generic symbols
 		{regex: /(\s|[()])('\w[\w_-]*)(\s|[()])/g, replace: '$1<span class="symbol">$2</span>$3'},
+		// known keywords
 		{
-			regex: new RegExp('(\\s)'+list_to_regex(keywords)+'(\\s)', 'g'),
+			regex: new RegExp('(\\s|[()])'+list_to_regex(keywords)+'(\\s|[()])', 'g'),
 			replace: function(fullmatch, whitespace, keyword, whitespace2) {
 				return whitespace + '<span class="keyword known">'+ keyword +'</span>'+ whitespace2;
 			}
@@ -366,7 +367,7 @@ var highlight_lisp = function() {
 		{regex: /(\s|[()])t(\s|[()])/g, replace: '$1<span class="nil">t</span>$2'},
 
 		// generic "maybe a function" forms. best second to last
-		{regex: /\((\w[\w_-]*)(\s)/g, replace: '(<span class="function">$1</span>$2'},
+		{regex: /\((\w[\w_:-]*)(\s|[()])/g, replace: '(<span class="function">$1</span>$2'},
 
 		// ()'s (should most probably be last, unless there's a good reason)
 		{regex: /([()])/g, replace: '<span class="list">$1</span>'}

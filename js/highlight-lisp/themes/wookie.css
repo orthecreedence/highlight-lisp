@@ -1,0 +1,24 @@
+/**
+ * Inspired by highlight.js's "Tomorrow night" theme
+ */
+pre { white-space: pre; background-color: #1d1f21; border: 0px solid #ccc; font-size: 13px; line-height: 19px; overflow: auto; padding: 6px 10px; border-radius: 3px; }
+pre code.lisp {white-space: pre; margin: 0; padding: 0; background: none; border: none; overflow-x: auto; font-size: 13px;}
+code.lisp {margin: 0 2px; padding: 0 5px; white-space: nowrap; font-family: Consolas, "Liberation Mono", Courier, monospace; background: #f8f8f8; border: 1px solid #eaeaea; border-radius: 3px;}
+
+code.lisp {color: #c5c8c6; color: #c9bf9f;}
+code.lisp .function {color: #d9c382;}
+code.lisp .function.known {color: #d9c382;}
+code.lisp .function.known.special {color: #d9c382; font-weight: bold;}
+code.lisp .keyword {color: #74b5ad;}
+code.lisp .keyword.known {color: #91b2ce;}
+code.lisp .symbol {color: #db919e;}
+code.lisp .lambda-list {color: #86adad;}
+code.lisp .number {color: #fa879c;}
+code.lisp .variable.known {color: #db697e;}
+code.lisp .variable.global {color: #96a646;}
+code.lisp .variable.constant {color: #96a646;}
+code.lisp .nil {color: #db919e; font-weight: bold;}
+code.lisp .list {}
+
+code.lisp .comment, code.lisp .comment *, code.lisp .comment .string {color: #777 !important;}
+code.lisp .string, code.lisp .string * {color: #db7d8e !important;}
