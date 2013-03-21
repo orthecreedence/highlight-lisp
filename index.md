@@ -10,9 +10,7 @@ HI!! Tired of *boring and outdated* looking Lisp code scaring away your website'
 visitors, costing you millions per year? Is the wife nagging you endlessly? Did
 some schmuck get *your* promotion at work?
 
-Worry no more, your troubles are over!
-
-Introducing `highligh-lisp.js`.
+Worry no more, your Common Lisp code highlighting woes are over!
 
 <!--
 <input
