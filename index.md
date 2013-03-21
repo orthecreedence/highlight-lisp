@@ -70,6 +70,7 @@ function switch_theme(name) {
     var style = document.getElementById('hl-theme');
     if(!style) return;
     style.href = '/highlight-lisp/js/highlight-lisp/themes/'+name+'.css';
+    return false;
 }
 HighlightLisp.highlight_auto();
 </script>
