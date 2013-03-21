@@ -6,12 +6,20 @@ layout: default
 highlight-lisp demo
 ===================
 
-<script type="text/javascript">
-function do_highlight() {
-    HighlightLisp.highlight_auto();
-}
-</script>
-<input type="button" id="highlight_btn" value="Click me to highlight!" onclick="do_highlight()" />
+HI!! Tired of *boring and outdated* looking Lisp code scaring away your website's
+visitors, costing you millions per year? Is the wife nagging you endlessly? Did
+some schmuck get *your* promotion at work?
+
+Worry no more, your life is about to be transformed:
+
+<input
+    type="button"
+    value="Click to CHANGE YOUR LIFE FOREVER!"
+    id="highlight_btn"
+    onclick="HighlightLisp.highlight_auto(); document.getElementById('highlight_btn').style.display='none';"
+/>
+
+**!!!WARNING!!!** There is no going back!
 
 <pre><code class="lisp">;; known globals
 *read-base*
