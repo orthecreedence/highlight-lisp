@@ -38,4 +38,5 @@ pre code {white-space: pre; margin: 0; padding: 0; background: none; border: non
 
 /* theme switcher */
 ul.themes {list-style: none; padding: 0 0 10px 0; margin: 0;}
-ul.themes li {float: right; margin: 0 16px 0 0; padding-right: 15px; border-right: 1px solid #ccc;}
+ul.themes li {float: left; margin: 0 16px 0 0; padding-right: 15px; line-height: 1em; border-right: 1px solid #ccc;}
+ul.themes li:last-child {border-right: 0;}
