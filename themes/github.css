@@ -15,6 +15,7 @@ code.lisp .variable.known {color: #c3c;}
 code.lisp .variable.global {color: #939;}
 code.lisp .variable.constant {color: #229;}
 code.lisp .nil {color: #f00;}
+code.lisp .list {color: #222;}
 
 code.lisp .comment, code.lisp .comment *, code.lisp .comment .string {color: #aaa !important;}
 code.lisp .string, code.lisp .string * {color: #d14 !important;}
