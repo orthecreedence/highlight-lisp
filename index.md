@@ -31,9 +31,9 @@ function switch_theme(name) {
 }
 </script>
 
-<ul class="themes">
+<ul class="themes clear">
     <li><a href="#github" onclick="switch_theme('github');">Github</a></li>
-    <li><a href="#dark" onclick="switch_theme('dark');">dark</a></li>
+    <li><a href="#dark" onclick="switch_theme('dark');">Dark</a></li>
 </ul>
 
 <pre><code class="lisp">;; known globals

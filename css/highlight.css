@@ -36,3 +36,6 @@ p {margin: 15px 0;}
 code {margin: 0 2px; padding: 0 5px; white-space: nowrap; font-family: Consolas, "Liberation Mono", Courier, monospace; background: #f8f8f8; border: 1px solid #eaeaea; border-radius: 3px;}
 pre code {white-space: pre; margin: 0; padding: 0; background: none; border: none;}
 
+/* theme switcher */
+ul.themes {list-style: none; padding: 0 0 10px 0; margin: 0;}
+ul.themes li {float: right; margin: 0 16px 0 0; padding-right: 15px; border-right: 1px solid #ccc;}
