@@ -16,8 +16,25 @@ Worry no more, your life is about to be transformed:
  type="button"
  value="Click to CHANGE YOUR LIFE FOREVER!"
  id="highlight_btn"
- onclick="HighlightLisp.highlight_auto(); document.getElementById('highlight_btn').disabled=true;"
+ onclick="do_highlight();"
 /> **!!!WARNING!!!** There is no going back!
+
+<script type="text/javascript">
+function do_highlight() {
+    HighlightLisp.highlight_auto();
+    document.getElementById('highlight_btn').disabled=true;
+}
+function switch_theme(name) {
+    var style = document.getElementById('hl-theme');
+    if(!style) return;
+    style.href = '/highlight-lisp/js/highlight-lisp/themes/'+name+'.css';
+}
+</script>
+
+<ul class="themes">
+    <li><a href="#github" onclick="switch_theme('github');">Github</a></li>
+    <li><a href="#dark" onclick="switch_theme('dark');">dark</a></li>
+</ul>
 
 <pre><code class="lisp">;; known globals
 *read-base*
