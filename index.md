@@ -60,15 +60,17 @@ Worry no more, your Common Lisp code highlighting woes are over!
 (loop for x being the :hash-keys of my-hash-table collect x)</code></pre>
 
 <script type="text/javascript">
+/*
 function do_highlight() {
     HighlightLisp.highlight_auto();
     document.getElementById('highlight_btn').disabled=true;
 }
+*/
 function switch_theme(name) {
     var style = document.getElementById('hl-theme');
     if(!style) return;
     style.href = '/highlight-lisp/js/highlight-lisp/themes/'+name+'.css';
 }
-do_highlight();
+HighlightLisp.highlight_auto();
 </script>
 
