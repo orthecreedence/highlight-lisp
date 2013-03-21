@@ -10,26 +10,18 @@ HI!! Tired of *boring and outdated* looking Lisp code scaring away your website'
 visitors, costing you millions per year? Is the wife nagging you endlessly? Did
 some schmuck get *your* promotion at work?
 
-Worry no more, your life is about to be transformed:
+Worry no more, your troubles are over!
 
+Introducing `highligh-lisp.js`.
+
+{*
 <input
  type="button"
  value="Click to CHANGE YOUR LIFE FOREVER!"
  id="highlight_btn"
  onclick="do_highlight();"
 /> **!!!WARNING!!!** There is no going back!
-
-<script type="text/javascript">
-function do_highlight() {
-    HighlightLisp.highlight_auto();
-    document.getElementById('highlight_btn').disabled=true;
-}
-function switch_theme(name) {
-    var style = document.getElementById('hl-theme');
-    if(!style) return;
-    style.href = '/highlight-lisp/js/highlight-lisp/themes/'+name+'.css';
-}
-</script>
+*}
 
 <ul class="themes clear">
     <li><strong>Themes</strong></li>
@@ -68,4 +60,17 @@ function switch_theme(name) {
 
 ;; testing known keywords (have class "known" as well as "keyword")
 (loop for x being the :hash-keys of my-hash-table collect x)</code></pre>
+
+<script type="text/javascript">
+function do_highlight() {
+    HighlightLisp.highlight_auto();
+    document.getElementById('highlight_btn').disabled=true;
+}
+function switch_theme(name) {
+    var style = document.getElementById('hl-theme');
+    if(!style) return;
+    style.href = '/highlight-lisp/js/highlight-lisp/themes/'+name+'.css';
+}
+do_highlight();
+</script>
 
