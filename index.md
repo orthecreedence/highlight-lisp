@@ -13,10 +13,10 @@ some schmuck get *your* promotion at work?
 Worry no more, your life is about to be transformed:
 
 <input
-    type="button"
-    value="Click to CHANGE YOUR LIFE FOREVER!"
-    id="highlight_btn"
-    onclick="HighlightLisp.highlight_auto(); document.getElementById('highlight_btn').style.display='none';"
+ type="button"
+ value="Click to CHANGE YOUR LIFE FOREVER!"
+ id="highlight_btn"
+ onclick="HighlightLisp.highlight_auto(); document.getElementById('highlight_btn').style.display='none';"
 />
 
 **!!!WARNING!!!** There is no going back!
