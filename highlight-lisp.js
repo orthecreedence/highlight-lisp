@@ -366,7 +366,7 @@ var highlight_lisp = function() {
 		{regex: /(\s|[()])t(\s|[()])/g, replace: '$1<span class="nil">t</span>$2'},
 
 		// generic "maybe a function" forms. best second to last
-		{regex: /\((\w[\w_-]*)(\s)/g, replace: '(<span class="function">$1</span>$2'},
+		{regex: /\((\w[\w_:-]*)(\s)/g, replace: '(<span class="function">$1</span>$2'},
 
 		// ()'s (should most probably be last, unless there's a good reason)
 		{regex: /([()])/g, replace: '<span class="list">$1</span>'}
