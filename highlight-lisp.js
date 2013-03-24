@@ -351,13 +351,13 @@ var highlight_lisp = function() {
 		// numbers
 		// ---------------------------------------------------------------------
 		// binary
-    	{regex: /(\s|[()])(#b[01]+)(\s|[()])/gi, replace: '$1<span class="number binary">$2</span>$3'},
+		{regex: /(\s|[()])(#b[01]+)(\s|[()])/gi, replace: '$1<span class="number binary">$2</span>$3'},
 		// hex
-    	{regex: /(\s|[()])(#x[\da-f]+)(\s|[()])/gi, replace: '$1<span class="number hex">$2</span>$3'},
+		{regex: /(\s|[()])(#x[\da-f]+)(\s|[()])/gi, replace: '$1<span class="number hex">$2</span>$3'},
 		// float
-    	{regex: /(\s|[()])([+-]{0,1}(?:\d+\.\d+|\d+\.|\.\d+))(\s|[()])/g, replace: '$1<span class="number float">$2</span>$3'},
+		{regex: /(\s|[()])([+-]{0,1}(?:\d+\.\d+|\d+\.|\.\d+))(\s|[()])/g, replace: '$1<span class="number float">$2</span>$3'},
 		// integers
-    	{regex: /(\s|[()])([+-]{0,1}\d+)(\s|[()])/g, replace: '$1<span class="number integer">$2</span>$3'},
+		{regex: /(\s|[()])([+-]{0,1}\d+)(\s|[()])/g, replace: '$1<span class="number integer">$2</span>$3'},
 
 		// ---------------------------------------------------------------------
 		// misc parsers
