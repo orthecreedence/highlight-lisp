@@ -263,7 +263,7 @@ var highlight_lisp = function() {
 		// "special" (let/lambda)
 		// ---------------------------------------------------------------------
 		{
-			regex: new RegExp('.'+list_to_regex(special)+'(\\s|[()])', 'gm'),
+			regex: new RegExp('.'+list_to_regex(special)+'([\\s()])', 'gm'),
 			replace: function(fullmatch, fnname, whitespace) {
 				if(fullmatch[0] == '(')
 				{
@@ -282,7 +282,7 @@ var highlight_lisp = function() {
 		// ---------------------------------------------------------------------
 		// known functions
 		{
-			regex: new RegExp('.'+list_to_regex(funcs)+'(\\s|[()])', 'gm'),
+			regex: new RegExp('.'+list_to_regex(funcs)+'([\\s()])', 'gm'),
 			replace: function(fullmatch, fnname, whitespace) {
 				if(fullmatch[0] == '(')
 				{
@@ -296,7 +296,7 @@ var highlight_lisp = function() {
 		},
 		// symbol functions (#'my-fn)
 		{
-			regex: /(\s|[()])(#'(\w[\w_-]*))(\s|[()])/g,
+			regex: /([\s()])(#'(\w[\w_-]*))([\s()])/g,
 			replace: function(fullmatch, delim1, symfun, sym, delim2)
 			{
 				var known = false;
@@ -311,23 +311,23 @@ var highlight_lisp = function() {
 		// ---------------------------------------------------------------------
 		// lambda keywords
 		// ---------------------------------------------------------------------
-		{regex: new RegExp('(\\s|[()])'+list_to_regex(lambda)+'(\\s|[()])', 'gm'), replace: '$1<span class="lambda-list">$2</span>$3'},
+		{regex: new RegExp('([\\s()])'+list_to_regex(lambda)+'([\\s()])', 'gm'), replace: '$1<span class="lambda-list">$2</span>$3'},
 
 		// ---------------------------------------------------------------------
 		// symbols/keywords/variables
 		// ---------------------------------------------------------------------
 		// generic symbols
-		{regex: /(\s|[()])('\w[\w_-]*)(\s|[()])/g, replace: '$1<span class="symbol">$2</span>$3'},
+		{regex: /([\s()])('\w[\w_-]*)([\s()])/g, replace: '$1<span class="symbol">$2</span>$3'},
 		// known keywords
 		{
-			regex: new RegExp('(\\s|[()])'+list_to_regex(keywords)+'(\\s|[()])', 'g'),
+			regex: new RegExp('([\\s()])'+list_to_regex(keywords)+'([\\s()])', 'g'),
 			replace: function(fullmatch, whitespace, keyword, whitespace2) {
 				return whitespace + '<span class="keyword known">'+ keyword +'</span>'+ whitespace2;
 			}
 		},
 		// generic keywords
 		{
-			regex: /(\s|[()])(:\w[\w_-]*)/g,
+			regex: /([\s()])(:\w[\w_-]*)/g,
 			replace: function(fullmatch, delim, keyword) {
 				if(fullmatch[0].match(/[\s()]/gm))
 				{
@@ -338,36 +338,35 @@ var highlight_lisp = function() {
 		},
 		// known variables
 		{
-			regex: new RegExp('(\\s|[()])'+list_to_regex(standard_vars)+'(\\s|[()])', 'g'),
+			regex: new RegExp('([\\s()])'+list_to_regex(standard_vars)+'([\\s()])', 'g'),
 			replace: function(fullmatch, whitespace, varname, whitespace2) {
 				return whitespace + '<span class="variable known">'+ varname +'</span>'+ whitespace2;
 			}
 		},
 		// globals/constants
-		{regex: /(\s|[()])(\*\w[\w_-]*\*)(\s|[()])/g, replace: '$1<span class="variable global">$2</span>$3'},
-		{regex: /(\s|[()])(\+\w[\w_-]*\+)(\s|[()])/g, replace: '$1<span class="variable constant">$2</span>$3'},
+		{regex: /([\s()])(\*\w[\w_-]*\*)([\s()])/g, replace: '$1<span class="variable global">$2</span>$3'},
+		{regex: /([\s()])(\+\w[\w_-]*\+)([\s()])/g, replace: '$1<span class="variable constant">$2</span>$3'},
 
 		// ---------------------------------------------------------------------
 		// numbers
 		// ---------------------------------------------------------------------
-		// binary
-		{regex: /(\s|[()])(#b[01]+)(\s|[()])/gi, replace: '$1<span class="number binary">$2</span>$3'},
-		// hex
-		{regex: /(\s|[()])(#x[\da-f]+)(\s|[()])/gi, replace: '$1<span class="number hex">$2</span>$3'},
-		// float
-		{regex: /(\s|[()])([+-]{0,1}(?:\d+\.\d+|\d+\.|\.\d+))(\s|[()])/g, replace: '$1<span class="number float">$2</span>$3'},
+		//// binary
+		//{regex: /([\s()])(#b[01]+)([\s()])/gi, replace: '$1<span class="number binary">$2</span>$3'},
+		//// hex
+		//{regex: /([\s()])(#x[\da-f]+)([\s()])/gi, replace: '$1<span class="number hex">$2</span>$3'},
+		//// float
+		//{regex: /([\s()])([+-]?(?:\d+\.\d+|\d+\.|\.\d+))([\s()])/g, replace: '$1<span class="number float">$2</span>$3'},
 		// integers
-		{regex: /(\s|[()])([+-]{0,1}\d+)(\s|[()])/g, replace: '$1<span class="number integer">$2</span>$3'},
+		{regex: /([\s()])([+-]?\d+)([\s()])/g, replace: '$1<span class="number integer">$2</span>$3'},
 
 		// ---------------------------------------------------------------------
 		// misc parsers
 		// ---------------------------------------------------------------------
 		// t/nil
-		{regex: /(\s|[()])nil(\s|[()])/g, replace: '$1<span class="nil">nil</span>$2'},
-		{regex: /(\s|[()])t(\s|[()])/g, replace: '$1<span class="nil">t</span>$2'},
+		{regex: /([\s()])(nil|t)([\s()])/g, replace: '$1<span class="nil">$2</span>$3'},
 
 		// generic "maybe a function" forms. best second to last
-		{regex: /\((\w[\w_:-]*)(\s|[()])/g, replace: '(<span class="function">$1</span>$2'},
+		{regex: /\((\w[\w_:-]*)([\s()])/g, replace: '(<span class="function">$1</span>$2'},
 
 		// ()'s (should most probably be last, unless there's a good reason)
 		{regex: /([()])/g, replace: '<span class="list">$1</span>'}
