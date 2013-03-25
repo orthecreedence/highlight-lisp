@@ -263,11 +263,11 @@ var highlight_lisp = function() {
 		// "special" (let/lambda)
 		// ---------------------------------------------------------------------
 		{
-			regex: new RegExp('.'+list_to_regex(special)+'(\\s|[()])', 'gm'),
-			replace: function(fullmatch, fnname, whitespace) {
+			regex: new RegExp('.'+list_to_regex(special)+'(?=[\\s()])', 'g'),
+			replace: function(fullmatch, fnname) {
 				if(fullmatch[0] == '(')
 				{
-					return '(<span class="function special known">' + fnname + '</span>' + whitespace;
+					return '(<span class="function special known">' + fnname + '</span>';
 				}
 				else
 				{
@@ -282,11 +282,11 @@ var highlight_lisp = function() {
 		// ---------------------------------------------------------------------
 		// known functions
 		{
-			regex: new RegExp('.'+list_to_regex(funcs)+'(\\s|[()])', 'gm'),
-			replace: function(fullmatch, fnname, whitespace) {
+			regex: new RegExp('.'+list_to_regex(funcs)+'(?=[\\s()])', 'g'),
+			replace: function(fullmatch, fnname) {
 				if(fullmatch[0] == '(')
 				{
-					return '(<span class="function known">' + fnname + '</span>' + whitespace;
+					return '(<span class="function known">' + fnname + '</span>';
 				}
 				else
 				{
@@ -296,38 +296,38 @@ var highlight_lisp = function() {
 		},
 		// symbol functions (#'my-fn)
 		{
-			regex: /(\s|[()])(#'(\w[\w_-]*))(\s|[()])/g,
-			replace: function(fullmatch, delim1, symfun, sym, delim2)
+			regex: /([\s()])(#'(\w[\w_-]*))(?=[\s()])/g,
+			replace: function(fullmatch, delim1, symfun, sym)
 			{
 				var known = false;
 				if(is_in_list(sym, funcs))
 				{
 					known = true;
 				}
-				return delim1 +'<span class="function symbol'+ (known ? ' known' : '') +'">'+ symfun +'</span>'+ delim2;
+				return delim1 +'<span class="function symbol'+ (known ? ' known' : '') +'">'+ symfun +'</span>';
 			}
 		},
 
 		// ---------------------------------------------------------------------
 		// lambda keywords
 		// ---------------------------------------------------------------------
-		{regex: new RegExp('(\\s|[()])'+list_to_regex(lambda)+'(\\s|[()])', 'gm'), replace: '$1<span class="lambda-list">$2</span>$3'},
+		{regex: new RegExp('([\\s()])'+list_to_regex(lambda)+'(?=[\\s()])', 'g'), replace: '$1<span class="lambda-list">$2</span>'},
 
 		// ---------------------------------------------------------------------
 		// symbols/keywords/variables
 		// ---------------------------------------------------------------------
 		// generic symbols
-		{regex: /(\s|[()])('\w[\w_-]*)(\s|[()])/g, replace: '$1<span class="symbol">$2</span>$3'},
+		{regex: /([\s()])('\w[\w_-]*)(?=[\s()])/g, replace: '$1<span class="symbol">$2</span>'},
 		// known keywords
 		{
-			regex: new RegExp('(\\s|[()])'+list_to_regex(keywords)+'(\\s|[()])', 'g'),
+			regex: new RegExp('([\\s()])'+list_to_regex(keywords)+'([\\s()])', 'g'),
 			replace: function(fullmatch, whitespace, keyword, whitespace2) {
 				return whitespace + '<span class="keyword known">'+ keyword +'</span>'+ whitespace2;
 			}
 		},
 		// generic keywords
 		{
-			regex: /(\s|[()])(:\w[\w_-]*)/g,
+			regex: /([\s()])(:\w[\w_-]*)/g,
 			replace: function(fullmatch, delim, keyword) {
 				if(fullmatch[0].match(/[\s()]/gm))
 				{
@@ -338,36 +338,35 @@ var highlight_lisp = function() {
 		},
 		// known variables
 		{
-			regex: new RegExp('(\\s|[()])'+list_to_regex(standard_vars)+'(\\s|[()])', 'g'),
+			regex: new RegExp('([\\s()])'+list_to_regex(standard_vars)+'([\\s()])', 'g'),
 			replace: function(fullmatch, whitespace, varname, whitespace2) {
 				return whitespace + '<span class="variable known">'+ varname +'</span>'+ whitespace2;
 			}
 		},
 		// globals/constants
-		{regex: /(\s|[()])(\*\w[\w_-]*\*)(\s|[()])/g, replace: '$1<span class="variable global">$2</span>$3'},
-		{regex: /(\s|[()])(\+\w[\w_-]*\+)(\s|[()])/g, replace: '$1<span class="variable constant">$2</span>$3'},
+		{regex: /([\s()])(\*\w[\w_-]*\*)(?=[\s()])/g, replace: '$1<span class="variable global">$2</span>'},
+		{regex: /([\s()])(\+\w[\w_-]*\+)(?=[\s()])/g, replace: '$1<span class="variable constant">$2</span>'},
 
 		// ---------------------------------------------------------------------
 		// numbers
 		// ---------------------------------------------------------------------
 		// binary
-    	{regex: /(\s|[()])(#b[01]+)(\s|[()])/gi, replace: '$1<span class="number binary">$2</span>$3'},
+		{regex: /([\s()])(#b[01]+)(?=[\s()])/ig, replace: '$1<span class="number binary">$2</span>'},
 		// hex
-    	{regex: /(\s|[()])(#x[\da-f]+)(\s|[()])/gi, replace: '$1<span class="number hex">$2</span>$3'},
+		{regex: /([\s()])(#x[\da-f]+)(?=[\s()])/ig, replace: '$1<span class="number hex">$2</span>'},
 		// float
-    	{regex: /(\s|[()])([+-]{0,1}(?:\d+\.\d+|\d+\.|\.\d+))(\s|[()])/g, replace: '$1<span class="number float">$2</span>$3'},
+		{regex: /([\s()])([+-]?(?:\d+\.\d+|\d+\.|\.\d+))(?=[\s()])/g, replace: '$1<span class="number float">$2</span>'},
 		// integers
-    	{regex: /(\s|[()])([+-]{0,1}\d+)(\s|[()])/g, replace: '$1<span class="number integer">$2</span>$3'},
+		{regex: /([\s()])(\d+)(?=[\s()])/g, replace: '$1<span class="number integer">$2</span>'},
 
 		// ---------------------------------------------------------------------
 		// misc parsers
 		// ---------------------------------------------------------------------
 		// t/nil
-		{regex: /(\s|[()])nil(\s|[()])/g, replace: '$1<span class="nil">nil</span>$2'},
-		{regex: /(\s|[()])t(\s|[()])/g, replace: '$1<span class="nil">t</span>$2'},
+		{regex: /([\s()])(nil|t)(?=[\s()])/g, replace: '$1<span class="nil">$2</span>'},
 
 		// generic "maybe a function" forms. best second to last
-		{regex: /\((\w[\w_:-]*)(\s|[()])/g, replace: '(<span class="function">$1</span>$2'},
+		{regex: /\((\w[\w_:-]*)(?=[\s()])/g, replace: '(<span class="function">$1</span>'},
 
 		// ()'s (should most probably be last, unless there's a good reason)
 		{regex: /([()])/g, replace: '<span class="list">$1</span>'}
@@ -383,11 +382,15 @@ var highlight_lisp = function() {
 		html = html.replace(/&amp;/g, '&');
 		html = html.replace(/&lt;/g, '<');
 		html = html.replace(/&gt;/g, '>');
+		// pad the HTML string (makes regexs much simpler)
+		html = "\n" + html + "\n";
 		for(var i = 0, n = replace.length; i < n; i++)
 		{
 			var rep = replace[i];
 			html = html.replace(rep.regex, rep.replace);
 		}
+		// unpad HTML string
+		html = html.replace(/(^\n|\n$)/g, '');
 		code_el.innerHTML = html;
 	},
 
