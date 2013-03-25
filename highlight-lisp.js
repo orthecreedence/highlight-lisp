@@ -350,14 +350,14 @@ var highlight_lisp = function() {
 		// ---------------------------------------------------------------------
 		// numbers
 		// ---------------------------------------------------------------------
-		//// binary
-		//{regex: /([\s()])(#b[01]+)([\s()])/gi, replace: '$1<span class="number binary">$2</span>$3'},
-		//// hex
-		//{regex: /([\s()])(#x[\da-f]+)([\s()])/gi, replace: '$1<span class="number hex">$2</span>$3'},
-		//// float
-		//{regex: /([\s()])([+-]?(?:\d+\.\d+|\d+\.|\.\d+))([\s()])/g, replace: '$1<span class="number float">$2</span>$3'},
+		// binary
+		{regex: /([\s()])(#b[01]+)([\s()])/gi, replace: '$1<span class="number binary">$2</span>$3'},
+		// hex
+		{regex: /([\s()])(#x[\da-f]+)([\s()])/gi, replace: '$1<span class="number hex">$2</span>$3'},
+		// float
+		{regex: /([\s()])([+-]?(?:\d+\.\d+|\d+\.|\.\d+))([\s()])/g, replace: '$1<span class="number float">$2</span>$3'},
 		// integers
-		{regex: /([\s()])([+-]?\d+)([\s()])/g, replace: '$1<span class="number integer">$2</span>$3'},
+		{regex: /([\s()])(\d+)([\s()])/g, replace: '$1<span class="number integer">$2</span>$3'},
 
 		// ---------------------------------------------------------------------
 		// misc parsers
@@ -382,11 +382,15 @@ var highlight_lisp = function() {
 		html = html.replace(/&amp;/g, '&');
 		html = html.replace(/&lt;/g, '<');
 		html = html.replace(/&gt;/g, '>');
+		// pad the HTML string (makes regexs much simpler)
+		html = "\n" + html + "\n";
 		for(var i = 0, n = replace.length; i < n; i++)
 		{
 			var rep = replace[i];
 			html = html.replace(rep.regex, rep.replace);
 		}
+		// unpad HTML string
+		html = html.replace(/(^\n|\n$)/g, '');
 		code_el.innerHTML = html;
 	},
 
