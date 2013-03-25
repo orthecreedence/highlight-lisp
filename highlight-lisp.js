@@ -263,7 +263,7 @@ var highlight_lisp = function() {
 		// "special" (let/lambda)
 		// ---------------------------------------------------------------------
 		{
-			regex: new RegExp('.'+list_to_regex(special)+'([\\s()])', 'gm'),
+			regex: new RegExp('.'+list_to_regex(special)+'([\\s()])', 'g'),
 			replace: function(fullmatch, fnname, whitespace) {
 				if(fullmatch[0] == '(')
 				{
@@ -282,7 +282,7 @@ var highlight_lisp = function() {
 		// ---------------------------------------------------------------------
 		// known functions
 		{
-			regex: new RegExp('.'+list_to_regex(funcs)+'([\\s()])', 'gm'),
+			regex: new RegExp('.'+list_to_regex(funcs)+'([\\s()])', 'g'),
 			replace: function(fullmatch, fnname, whitespace) {
 				if(fullmatch[0] == '(')
 				{
@@ -311,7 +311,7 @@ var highlight_lisp = function() {
 		// ---------------------------------------------------------------------
 		// lambda keywords
 		// ---------------------------------------------------------------------
-		{regex: new RegExp('([\\s()])'+list_to_regex(lambda)+'([\\s()])', 'gm'), replace: '$1<span class="lambda-list">$2</span>$3'},
+		{regex: new RegExp('([\\s()])'+list_to_regex(lambda)+'([\\s()])', 'g'), replace: '$1<span class="lambda-list">$2</span>$3'},
 
 		// ---------------------------------------------------------------------
 		// symbols/keywords/variables
