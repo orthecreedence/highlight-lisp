@@ -359,7 +359,7 @@ var highlight_lisp = function() {
 		// ratio
 		{regex: /([\s()])([+-]?\d+(?:\/\d+)?)(?=[\s()])/g, replace: '$1<span class="number ratio">$2</span>'},
 		// integers
-		{regex: /([\s()])([+-]?\d+?)(?=[\s()])/g, replace: '$1<span class="number integer">$2</span>'},
+		{regex: /([\s()])([+-]?\d+)(?=[\s()])/g, replace: '$1<span class="number integer">$2</span>'},
 
 		// ---------------------------------------------------------------------
 		// misc parsers
