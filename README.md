@@ -81,6 +81,9 @@ Any numbers: `69`, `-82.4`, `#xF047`, `#b11010`
   - **Integers**  
   CSS class `number integer`  
   Simple numbers: `42`, `867`, etc. (no decimals)
+  - **Ratios**  
+  CSS class `number ratio`
+  Examples: `80/9`, `23/4`
   - **Floats**  
   CSS class `number float`  
   Numbers with a decimal: `+47.82112`, `32.9` `3.` `.009`

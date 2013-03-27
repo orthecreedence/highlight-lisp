@@ -356,8 +356,10 @@ var highlight_lisp = function() {
 		{regex: /([\s()])(#x[\da-f]+)(?=[\s()])/ig, replace: '$1<span class="number hex">$2</span>'},
 		// float
 		{regex: /([\s()])([+-]?(?:\d+\.\d+|\d+\.|\.\d+))(?=[\s()])/g, replace: '$1<span class="number float">$2</span>'},
+		// ratio
+		{regex: /([\s()])([+-]?\d+(?:\/\d+)?)(?=[\s()])/g, replace: '$1<span class="number ratio">$2</span>'},
 		// integers
-		{regex: /([\s()])([+-]?\d+)(?=[\s()])/g, replace: '$1<span class="number integer">$2</span>'},
+		{regex: /([\s()])([+-]?\d+?)(?=[\s()])/g, replace: '$1<span class="number integer">$2</span>'},
 
 		// ---------------------------------------------------------------------
 		// misc parsers
