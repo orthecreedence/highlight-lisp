@@ -393,6 +393,7 @@ var highlight_lisp = function() {
 		}
 		// unpad HTML string
 		html = html.replace(/(^\n|\n$)/g, '');
+		html = html.replace(/<(?!\/?span)/g, '&lt;');
 		code_el.innerHTML = html;
 	},
 
