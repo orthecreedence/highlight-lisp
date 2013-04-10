@@ -20,5 +20,8 @@ code.lisp .variable.constant {color: #a77;}
 code.lisp .nil {color: #de935f;}
 code.lisp .list {}
 
-code.lisp .comment, code.lisp .comment *, code.lisp .comment .string {color: #777 !important;}
 code.lisp .string, code.lisp .string * {color: #b5bd88 !important;}
+code.lisp .comment,
+code.lisp .comment *,
+code.lisp .comment .string
+code.lisp .comment .string * {color: #777 !important;}
