@@ -25,3 +25,4 @@ code.lisp .comment,
 code.lisp .comment *,
 code.lisp .comment .string
 code.lisp .comment .string * {color: #aaa !important;}
+code.lisp .string .comment {color: #d14 !important;}
