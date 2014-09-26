@@ -394,6 +394,9 @@ var highlight_lisp = function() {
 		// unpad HTML string
 		html = html.replace(/(^\n|\n$)/g, '');
 		html = html.replace(/<(?!\/?span)/g, '&lt;');
+		// Re-encode stray &s to conform with XHTML
+		html = html.replace(/&/g, '&amp;');
+		
 		code_el.innerHTML = html;
 	},
 
