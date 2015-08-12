@@ -26,3 +26,6 @@ code.hl-highlighted .comment *,
 code.hl-highlighted .comment .string
 code.hl-highlighted .comment .string * {color: #777 !important;}
 code.hl-highlighted .string .comment {color: #b5bd88 !important;}
+
+code.hl-highlighted .list.active {display: inline-block; color: #333; background: #aaa;}
+

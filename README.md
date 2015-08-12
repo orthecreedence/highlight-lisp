@@ -45,6 +45,18 @@ var code = document.getElementById('my-code-element');
 HighlightLisp.highlight_element(code);
 ```
 
+Paren matching
+--------------
+
+You can now enable paren matching (on mouse hover):
+
+```js
+HighlightLisp.paren_match();
+```
+
+This will go through all highlighted blocks of code and add mouseover/mouseout
+event listeners to all ('s and )'s that highlight the matching paren on hover.
+
 What gets highlighted
 ---------------------
 - **Functions**  
