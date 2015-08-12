@@ -379,6 +379,7 @@ var highlight_lisp = function() {
 	 */
 	this.highlight_element = function(code_el)
 	{
+		code_el.className += ' hl-highlighted';
 		var html = code_el.innerHTML;
 		// can't have &...;'s running wild like a pack of animals...
 		html = html.replace(/&amp;/g, '&');
@@ -393,6 +394,10 @@ var highlight_lisp = function() {
 		}
 		// unpad HTML string
 		html = html.replace(/(^\n|\n$)/g, '');
+		html = html.replace(/<(?!\/?span)/g, '&lt;');
+		// Re-encode stray &s to conform with XHTML
+		//html = html.replace(/&/g, '&amp;');
+		
 		code_el.innerHTML = html;
 	},
 
@@ -414,6 +419,99 @@ var highlight_lisp = function() {
 			{
 				this.highlight_element(code);
 			}
+		}
+	},
+
+	/**
+	 * If called, enables paren matching (hovering over a paren will add the
+	 * "active" class to both the highlighted and the matching paren)
+	 */
+	this.paren_match = function(options)
+	{
+		options || (options = {});
+
+		if(!('querySelector' in document))
+		{
+			console.error('HighlightLisp.paren_match: browser does not support querySelector/matches');
+			return;
+		}
+
+		var matches = function(element, selector)
+		{
+			if(!element) return;
+			var domatch;
+			var tests = ['matches', 'msMatchesSelector', 'mozMatchesSelector', 'webkitMatchesSelector'];
+			for(var i = 0; i < tests.length; i++)
+			{
+				if(!(tests[i] in element)) continue;
+				domatch = element[tests[i]];
+				break;
+			}
+
+			return domatch.call(element, selector);
+		};
+
+		var is_paren = function(el)
+		{
+			return matches(el, 'code > .list, code span:not(.comment):not(.string) .list');
+		};
+
+		var find_match = function(paren)
+		{
+			// grab all non-commented/stringed parens
+			var children = paren.parentElement.querySelectorAll('code > span.list, code span:not(.comment):not(.string) .list');
+			// turn them into a real array
+			children = Array.prototype.slice.call(children);
+
+			var is_opening = function(el) { return el.innerHTML == '('; };
+
+			// tracks when to start counting parens
+			var count = false;
+			// tests if this is an opening or closing paren
+			var opening = is_opening(paren);
+			// if this is a closing paren, reverse the children so we can search
+			// backwards just by going forwards
+			if(!opening) children.reverse();
+
+			for(var i = 0; i < children.length; i++)
+			{
+				var child = children[i];
+				var open = is_opening(child);
+				// mark the first occurance of the paren, and start counting
+				// from there
+				if(child === paren)
+				{
+					count = 1;
+					continue;
+				}
+				if(count === false) continue;
+				if(opening == open) count++;
+				else count--;
+				if(count === 0) return child;
+			}
+		};
+
+		var add_class = function(el, classname, add)
+		{
+			if(!el) return;
+			el.className = el.className.replace(new RegExp(classname, 'g'), '');
+			if(add) el.className += ' '+classname;
+		};
+
+		var codes = document.getElementsByClassName('hl-highlighted');
+		for(var i = 0; i < codes.length; i++)
+		{
+			var code = codes[i];
+			var listener = function(add, e)
+			{
+				var hovered = e.target;
+				if(!is_paren(hovered)) return;
+				var match = find_match(hovered);
+				add_class(hovered, 'active', add);
+				add_class(match, 'active', add);
+			};
+			code.addEventListener('mouseover', listener.bind(this, true));
+			code.addEventListener('mouseout', listener.bind(this, false));
 		}
 	}
 };
