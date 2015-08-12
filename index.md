@@ -74,6 +74,6 @@ function switch_theme(name) {
     return false;
 }
 HighlightLisp.highlight_auto();
-HighlightList.paren_match();
+HighlightLisp.paren_match();
 </script>
 
