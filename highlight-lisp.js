@@ -491,13 +491,25 @@ var highlight_lisp = function() {
 			}
 		};
 
-		var add_class = function(el, classname, add)
-		{
-			if(!el) return;
-			el.className = el.className.replace(new RegExp(classname, 'g'), '');
-			if(add) el.className += ' '+classname;
-		};
-
+		var toggle_class = function(element, classname)
+        	{
+            		if (element.classList)
+                	{ element.classList.toggle(classname); }
+            		else
+                	{
+                    		//for IE9
+                    		var classes = element.className.split(" ");
+                    		var i = classes.indexOf(classname);
+                    		if (i >= 0)
+                        	{ classes.splice(i, 1); }
+                    		else
+                        	{
+                            		classes.push(classname);
+                            		element.className = classes.join(" ");
+                        	}
+                	}
+        	}
+		
 		var codes = document.getElementsByClassName('hl-highlighted');
 		for(var i = 0; i < codes.length; i++)
 		{
@@ -507,8 +519,8 @@ var highlight_lisp = function() {
 				var hovered = e.target;
 				if(!is_paren(hovered)) return;
 				var match = find_match(hovered);
-				add_class(hovered, 'active', add);
-				add_class(match, 'active', add);
+				toggle_class(hovered, 'active');
+				toggle_class(match, 'active');
 			};
 			code.addEventListener('mouseover', listener.bind(this, true));
 			code.addEventListener('mouseout', listener.bind(this, false));
