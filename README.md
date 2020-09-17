@@ -25,7 +25,7 @@ and call one of highlight-lisp's highlighting functions:
 <pre><code class="lisp">(defun test-syntax-highlighter ()
   "Docstring explaining what this function does."
   (let ((hash (make-hash-table :test #'equal)))
-    ...))</pre></code>
+    ...))</code></pre>
 ```
 
 Once the HTML is set up, there are a few ways to initialize highlighting:
